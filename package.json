@@ -1,7 +1,7 @@
 {
-  "name": "redux-tunner",
+  "name": "redux-tuner",
   "version": "0.0.1",
-  "description": "Tunner For Redux",
+  "description": "Redux tuning",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
