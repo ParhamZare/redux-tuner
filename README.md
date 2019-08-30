@@ -1,4 +1,4 @@
-# redux-tunner
+# redux-tuning
 
 Improve speed and add offline support for React&Redux Application
 
