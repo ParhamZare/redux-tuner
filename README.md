@@ -21,10 +21,7 @@ First:
 
 import {createStore, applyMiddleware} from 'redux'
 import rootReducer from '../reducer';
-import {logger} from 'redux-logger'
 import {customStore, runService} from "redux-tunner";
-
-const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(customStore(rootReducer));
 
