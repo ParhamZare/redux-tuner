@@ -1,4 +1,3 @@
-import React from 'react';
 import DB from './db'
 import Helper from './Helper';
 import HocComponent from './HocComponent'

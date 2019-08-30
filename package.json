@@ -6,9 +6,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "dexie": "^2.0.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
   "peerDependencies": {
     "dexie": "^2.0.4",
-    "react": "^16.9.0"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.5.5",
