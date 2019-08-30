@@ -11,19 +11,11 @@
     "react": "^16.9.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/plugin-proposal-class-properties": "^7.5.5"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+    "@babel/preset-react": "^7.0.0"
   },
   "author": "Parham Zare",
+  "email": "parhamzare1@gmail.com",
   "license": "ISC"
 }
