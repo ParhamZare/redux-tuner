@@ -35,7 +35,6 @@ import {connect} from 'react-redux';
 import {TransformComponent} from "redux-tunner";
 
 export const Component = (props) => {
-    let {app, data} = props;
     return (
         <div>
           <h1>redux tunner</h1>
