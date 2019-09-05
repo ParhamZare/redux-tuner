@@ -103,7 +103,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 
 
-var db = new __WEBPACK_IMPORTED_MODULE_0_dexie__["a" /* default */](__WEBPACK_IMPORTED_MODULE_1__Config__["a" /* default */].databaseName);
+var db = new __WEBPACK_IMPORTED_MODULE_0_dexie__["a" /* default */](__WEBPACK_IMPORTED_MODULE_1__Config__["a" /* default */].databaseName); //TODO add realm
+
 var initDB = function initDB() {
   return new Promise(function (resolve, reject) {
     if (!db.isOpen()) {
@@ -5510,14 +5511,15 @@ for (var i = 0; i < 256; ++i) {
 function bytesToUuid(buf, offset) {
   var i = offset || 0;
   var bth = byteToHex;
-  return bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]];
+  // join used to fix memory issue caused by concatenation: https://bugs.chromium.org/p/v8/issues/detail?id=3175#c4
+  return ([bth[buf[i++]], bth[buf[i++]], 
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]], '-',
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]],
+	bth[buf[i++]], bth[buf[i++]]]).join('');
 }
 
 module.exports = bytesToUuid;
@@ -5795,7 +5797,11 @@ module.exports = function(name, version, hashfunc) {
     return buf || bytesToUuid(bytes);
   };
 
-  generateUUID.name = name;
+  // Function#name is not settable on some platforms (#270)
+  try {
+    generateUUID.name = name;
+  } catch (err) {
+  }
 
   // Pre-defined namespaces, per Appendix C
   generateUUID.DNS = '6ba7b810-9dad-11d1-80b4-00c04fd430c8';
