@@ -1,6 +1,6 @@
 {
   "name": "redux-tuner",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Redux tuning",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,7 @@
   "dependencies": {
     "dexie": "^2.0.4",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
-  },
-  "peerDependencies": {
-    "dexie": "^2.0.4",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "uuid": "^3.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
@@ -29,6 +24,10 @@
   "author": {
     "name": "Parham Zare",
     "email": "parhamzare1@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/ParhamZare/redux-tuner",
+    "type": "github"
   },
   "license": "MIT"
 }
