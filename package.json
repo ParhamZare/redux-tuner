@@ -1,6 +1,6 @@
 {
   "name": "redux-tuner",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Redux tuning",
   "main": "index.js",
   "scripts": {
