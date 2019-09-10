@@ -17,26 +17,26 @@ const TransformComponent = (importComponent) => {
                 .length;
             let index = 0;
             let finalObject = Object.assign({}, this.props);
-            for (var key in props) {
-                if (++index < countOfItemes) {
-                    let result = {}
-                    switch (typeof props[key]) {
-                        case "object":
-                            result = await Helper.getTransformedData(props[key]);
-                            finalObject[key] = result;
-                            break;
-                        case "string":
-                            if (props[key].includes(">>")) {
-                                let value = props[key].split(">>")
-                                result = await(Helper.getDataWithKeyFromDB(value[0]));
-                                finalObject[value[1]] = result.data;
-                            }
-                            break;
-                    }
-                } else {
-                    this.setState({isFinishedTransform: true, props: finalObject})
+            let keysOfProps = Object.keys(props);
+            keysOfProps.map(async (key, index) => {
+                let result = {}
+                switch (typeof props[key]) {
+                    case "object":
+                        result = await Helper.getTransformedData(props[key]);
+                        finalObject[key] = result;
+                        break;
+                    case "string":
+                        if (props[key].includes(">>")) {
+                            let value = props[key].split(">>")
+                            result = await (Helper.getDataWithKeyFromDB(value[0]));
+                            finalObject[key] = result.data;
+                        }
+                        break;
                 }
-            }
+                if (index === (keysOfProps.length - 1)) {
+                    this.setState({ isFinishedTransform: true, props: finalObject })
+                }
+            });
         }
 
         componentDidMount() {
@@ -50,9 +50,9 @@ const TransformComponent = (importComponent) => {
         }
 
         render() {
-            const {isFinishedTransform, Component, props} = this.state;
+            const { isFinishedTransform, Component, props } = this.state;
             return Component && isFinishedTransform
-                ? <Component {...props}/>
+                ? <Component {...props} />
                 : null;
         }
     }

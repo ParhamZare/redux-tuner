@@ -21,7 +21,9 @@ const updateImmutableState = (state, action) => {
                 action[key] = generateKey + ">>" + key;
             }
             if (index <= objectsOfAction.length - 1) {
-                Helper.storeNewStateToDB(generateKey, finalObject);
+                if (Object.keys(finalObject).length > 1) {
+                    Helper.storeNewStateToDB(generateKey, finalObject);
+                }
             }
         });
         return state;
@@ -47,6 +49,11 @@ export const runService = (store) => {
                             parameters[key] = item.id + ">>" + key;
                         }
                         if (index === objects.length - 1) {
+                            console.log("DISPATCH", {
+                                type: item.actionType,
+                                dontStoreInDB: true,
+                                ...parameters
+                            })
                             store.dispatch({
                                 type: item.actionType,
                                 dontStoreInDB: true,

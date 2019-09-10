@@ -261,38 +261,34 @@ var Helper = {
   },
   getTransformedData: function getTransformedData(state) {
     return new Promise(function (resolve, reject) {
-      try {
-        if (_typeof(state) === "object") {
-          var clonedObject = Object.assign({}, state);
-          var items = Object.keys(state);
-          items.map(function (key, index) {
-            if (state[key].includes(">>")) {
-              var values = state[key].split(">>");
+      if (_typeof(state) === "object") {
+        var clonedObject = Object.assign({}, state);
+        var items = Object.keys(state);
+        items.map(function (key, index) {
+          if (state[key] && typeof state[key] === 'string' && state[key].includes(">>")) {
+            var values = state[key].split(">>");
 
-              if (Helper.checkIsValidUUID(values[0])) {
-                Helper.getDataWithKeyFromDB(values[0]).then(function (result) {
-                  clonedObject[values[1]] = result.data;
+            if (Helper.checkIsValidUUID(values[0])) {
+              Helper.getDataWithKeyFromDB(values[0]).then(function (result) {
+                clonedObject[values[1]] = result.data;
 
-                  if (index <= items.length - 1) {
-                    resolve(clonedObject);
-                  }
-                });
-              } else {
-                if (index <= items.length) {
+                if (index <= items.length - 1) {
                   resolve(clonedObject);
                 }
-              }
+              });
             } else {
               if (index <= items.length) {
                 resolve(clonedObject);
               }
             }
-          });
-        } else {
-          resolve(state);
-        }
-      } catch (e) {
-        console.log(e);
+          } else {
+            if (index <= items.length) {
+              resolve(clonedObject);
+            }
+          }
+        });
+      } else {
+        resolve(state);
       }
     });
   }
@@ -373,81 +369,87 @@ var TransformComponent = function TransformComponent(importComponent) {
       value: function () {
         var _transformData = _asyncToGenerator(
         /*#__PURE__*/
-        regeneratorRuntime.mark(function _callee(props) {
-          var countOfItemes, index, finalObject, key, result, value;
-          return regeneratorRuntime.wrap(function _callee$(_context) {
+        regeneratorRuntime.mark(function _callee2(props) {
+          var _this2 = this;
+
+          var countOfItemes, index, finalObject, keysOfProps;
+          return regeneratorRuntime.wrap(function _callee2$(_context2) {
             while (1) {
-              switch (_context.prev = _context.next) {
+              switch (_context2.prev = _context2.next) {
                 case 0:
                   countOfItemes = Object.keys(props).length;
                   index = 0;
                   finalObject = Object.assign({}, this.props);
-                  _context.t0 = regeneratorRuntime.keys(props);
+                  keysOfProps = Object.keys(props);
+                  keysOfProps.map(
+                  /*#__PURE__*/
+                  function () {
+                    var _ref = _asyncToGenerator(
+                    /*#__PURE__*/
+                    regeneratorRuntime.mark(function _callee(key, index) {
+                      var result, value;
+                      return regeneratorRuntime.wrap(function _callee$(_context) {
+                        while (1) {
+                          switch (_context.prev = _context.next) {
+                            case 0:
+                              result = {};
+                              _context.t0 = _typeof(props[key]);
+                              _context.next = _context.t0 === "object" ? 4 : _context.t0 === "string" ? 9 : 16;
+                              break;
 
-                case 4:
-                  if ((_context.t1 = _context.t0()).done) {
-                    _context.next = 28;
-                    break;
-                  }
+                            case 4:
+                              _context.next = 6;
+                              return __WEBPACK_IMPORTED_MODULE_2__Helper__["a" /* default */].getTransformedData(props[key]);
 
-                  key = _context.t1.value;
+                            case 6:
+                              result = _context.sent;
+                              finalObject[key] = result;
+                              return _context.abrupt("break", 16);
 
-                  if (!(++index < countOfItemes)) {
-                    _context.next = 25;
-                    break;
-                  }
+                            case 9:
+                              if (!props[key].includes(">>")) {
+                                _context.next = 15;
+                                break;
+                              }
 
-                  result = {};
-                  _context.t2 = _typeof(props[key]);
-                  _context.next = _context.t2 === "object" ? 11 : _context.t2 === "string" ? 16 : 23;
-                  break;
+                              value = props[key].split(">>");
+                              _context.next = 13;
+                              return __WEBPACK_IMPORTED_MODULE_2__Helper__["a" /* default */].getDataWithKeyFromDB(value[0]);
 
-                case 11:
-                  _context.next = 13;
-                  return __WEBPACK_IMPORTED_MODULE_2__Helper__["a" /* default */].getTransformedData(props[key]);
+                            case 13:
+                              result = _context.sent;
+                              finalObject[key] = result.data;
 
-                case 13:
-                  result = _context.sent;
-                  finalObject[key] = result;
-                  return _context.abrupt("break", 23);
+                            case 15:
+                              return _context.abrupt("break", 16);
 
-                case 16:
-                  if (!props[key].includes(">>")) {
-                    _context.next = 22;
-                    break;
-                  }
+                            case 16:
+                              if (index === keysOfProps.length - 1) {
+                                _this2.setState({
+                                  isFinishedTransform: true,
+                                  props: finalObject
+                                });
+                              }
 
-                  value = props[key].split(">>");
-                  _context.next = 20;
-                  return __WEBPACK_IMPORTED_MODULE_2__Helper__["a" /* default */].getDataWithKeyFromDB(value[0]);
+                            case 17:
+                            case "end":
+                              return _context.stop();
+                          }
+                        }
+                      }, _callee);
+                    }));
 
-                case 20:
-                  result = _context.sent;
-                  finalObject[value[1]] = result.data;
+                    return function (_x2, _x3) {
+                      return _ref.apply(this, arguments);
+                    };
+                  }());
 
-                case 22:
-                  return _context.abrupt("break", 23);
-
-                case 23:
-                  _context.next = 26;
-                  break;
-
-                case 25:
-                  this.setState({
-                    isFinishedTransform: true,
-                    props: finalObject
-                  });
-
-                case 26:
-                  _context.next = 4;
-                  break;
-
-                case 28:
+                case 5:
                 case "end":
-                  return _context.stop();
+                  return _context2.stop();
               }
             }
-          }, _callee, this);
+          }, _callee2, this);
         }));
 
         function transformData(_x) {
@@ -464,10 +466,10 @@ var TransformComponent = function TransformComponent(importComponent) {
     }, {
       key: "componentWillReceiveProps",
       value: function componentWillReceiveProps(nextProps) {
-        var _this2 = this;
+        var _this3 = this;
 
         setTimeout(function () {
-          _this2.transformData(nextProps);
+          _this3.transformData(nextProps);
         }, 100);
       }
     }, {
@@ -531,7 +533,9 @@ var updateImmutableState = function updateImmutableState(state, action) {
       }
 
       if (index <= objectsOfAction.length - 1) {
-        __WEBPACK_IMPORTED_MODULE_1__Helper__["a" /* default */].storeNewStateToDB(generateKey, finalObject);
+        if (Object.keys(finalObject).length > 1) {
+          __WEBPACK_IMPORTED_MODULE_1__Helper__["a" /* default */].storeNewStateToDB(generateKey, finalObject);
+        }
       }
     });
     return state;
@@ -557,6 +561,10 @@ var runService = function runService(store) {
         }
 
         if (index === objects.length - 1) {
+          console.log("DISPATCH", _objectSpread({
+            type: item.actionType,
+            dontStoreInDB: true
+          }, parameters));
           store.dispatch(_objectSpread({
             type: item.actionType,
             dontStoreInDB: true
