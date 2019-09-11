@@ -67,3 +67,5 @@ export const runService = (store) => {
 }
 
 export const TransformComponent = HocComponent;
+
+export const TransformData = Helper.getTransformedData
