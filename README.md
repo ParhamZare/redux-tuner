@@ -13,7 +13,7 @@ when data is a huge and your app start to slow because all state stored in "Ram"
 
 ![architecture text](https://github.com/ParhamZare/redux-tunner/blob/master/Flow.svg)
 
-Example
+Online example
 https://codesandbox.io/s/github/ParhamZare/pepper
 
 **Usage**
