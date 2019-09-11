@@ -18,6 +18,12 @@ https://codesandbox.io/s/github/ParhamZare/pepper
 
 **Usage**
 
+How Install Package:
+
+```
+npm i redux-tuner
+```
+
 First:
 
 ```javascript
