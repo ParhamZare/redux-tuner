@@ -11,7 +11,7 @@ But I had one issue on mobile application and huge web application
 when data is a huge and your app start to slow because all state stored in "Ram" .
  I started to write one module as "Redux-tuner" module. when I dispatch one action I wrote one middleware to store data in the disk and generate one key and change data to key in redux. when I need access data I transform data from key to data and use in React component or in middleware and I wrote on service to rehydrate redux state to enable offline mode for the application.
 
-![architecture text](https://github.com/ParhamZare/redux-tunner/blob/master/Flow.svg?ver=1)
+![architecture text](https://github.com/ParhamZare/redux-tunner/blob/master/Flow.svg)
 
 Online example
 https://codesandbox.io/s/github/ParhamZare/pepper
