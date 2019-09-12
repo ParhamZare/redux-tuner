@@ -2,7 +2,7 @@
 
 ![architecture text](https://github.com/ParhamZare/redux-tuner/raw/master/architecture.png)
 
-Improve speed and add offline support for React&Redux Application with two-step
+Improve speed and provide faster rehydrate data, support for React&Redux Application with two-step
 
 I think "Redux" is the best thing for javascript application It helps you write applications that behave consistently, run in different environments like ("Server" , " Mobile app", " WebApp").
 when we dispatch some action in "Redux". "Redux" saves your application state and you can access your state with one container called "React-redux".
